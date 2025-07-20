@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Sun Jul 20 16:09:05 2025
+# Process ID: 472
+# Current directory: C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/prj/prj.runs/impl_2
+# Command line: vivado.exe -log test_spi_master_tx_mode2.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source test_spi_master_tx_mode2.tcl -notrace
+# Log file: C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/prj/prj.runs/impl_2/test_spi_master_tx_mode2.vdi
+# Journal file: C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/prj/prj.runs/impl_2\vivado.jou
+#-----------------------------------------------------------
+source test_spi_master_tx_mode2.tcl -notrace

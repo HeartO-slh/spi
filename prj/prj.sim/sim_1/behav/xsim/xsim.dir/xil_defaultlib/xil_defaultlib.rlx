@@ -1,0 +1,13 @@
+0.7
+2020.2
+Jun 10 2021
+20:04:57
+C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/prj/prj.sim/sim_1/behav/xsim/glbl.v,1623370582,verilog,,,,glbl,,,,,,,,
+C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/sim/tb_spi_master_tx_mode0.v,1751965397,verilog,,,,tb_spi_master_tx_mode0,,,,,,,,
+C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/sim/tb_spi_master_tx_mode1.v,1752034248,verilog,,,,tb_spi_master_tx_mode1,,,,,,,,
+C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/sim/tb_spi_master_tx_mode2.v,1752033787,verilog,,,,tb_spi_master_tx_mode2,,,,,,,,
+C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/sim/tb_test_spi_master_tx_mode1.v,1752044161,verilog,,,,tb_test_spi_master_tx_mode1,,,,,,,,
+C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/src/spi_master_tx_mode0.v,1752996922,verilog,,C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/sim/tb_spi_master_tx_mode0.v,,spi_master_tx_mode0,,,,,,,,
+C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/src/spi_master_tx_mode1.v,1752994088,verilog,,C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/sim/tb_spi_master_tx_mode1.v,,spi_master_tx_mode1,,,,,,,,
+C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/src/spi_master_tx_mode2.v,1752997274,verilog,,C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/sim/tb_spi_master_tx_mode2.v,,spi_master_tx_mode2,,,,,,,,
+C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/src/test_spi_master_tx_mode1.v,1752044945,verilog,,C:/Users/HeartO/Desktop/Lab_FPGA/ls_interface/spi/spi/sim/tb_test_spi_master_tx_mode1.v,,test_spi_master_tx_mode1,,,,,,,,
