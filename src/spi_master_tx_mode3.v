@@ -1,7 +1,7 @@
 ////////////////////
-// Date    : 2025.7.9
+// Date    : 2025.7.13
 // Coder   : HeartO
-// Version : V1.0
+// Version : V1.1
 // Software: Vivado2021.1
 ////////////////////
 module spi_master_tx_mode3#(
@@ -35,9 +35,6 @@ module spi_master_tx_mode3#(
     reg [31:0]cnt_sclk1;
     reg [31:0]cnt_sclk2;
 
-    // flag
-    reg flag;
-
     // num_bit
     reg [3:0]num_bit;
 
@@ -46,10 +43,11 @@ module spi_master_tx_mode3#(
 /////always/////
 
     // 开始信号
+    reg start;
     always@(posedge In_clk or negedge In_rst_n)begin
         if(In_rst_n == 1'b0)
             start <= 1'b0;
-        else if((num_bit == 8)&&(cnt_sclk2 == CNT_SCLK - 1))
+        else if((num_bit == 7)&&(cnt_sclk1 == DIV_SCLK - 1))
             start <= 1'b0;
         else if(In_tx_req == 1'b1)
             start <= 1'b1;
@@ -61,7 +59,7 @@ module spi_master_tx_mode3#(
     always@(posedge In_clk or negedge In_rst_n)begin
         if(In_rst_n == 1'b0)
             Out_tx_busy <= 1'b0;
-        else if((num_bit == 8)&&(cnt_sclk2 == CNT_SCLK - 1))
+        else if((num_bit == 7)&&(cnt_sclk1 == DIV_SCLK - 1))
             Out_tx_busy <= 1'b0;
         else if(In_tx_req == 1'b1)
             Out_tx_busy <= 1'b1;
@@ -73,7 +71,7 @@ module spi_master_tx_mode3#(
     always@(posedge In_clk or negedge In_rst_n)begin
         if(In_rst_n == 1'b0)
             Out_spi_cs_n <= 1'b1;
-        else if((num_bit == 8)&&(cnt_sclk2 == CNT_SCLK - 1))
+        else if((num_bit == 7)&&(cnt_sclk1 == DIV_SCLK - 1))
             Out_spi_cs_n <= 1'b1;
         else if(In_tx_req == 1'b1)
             Out_spi_cs_n <= 1'b0;
@@ -82,6 +80,7 @@ module spi_master_tx_mode3#(
     end
 
     // 计时
+    reg [31:0]cnt_sclk1;
     always@(posedge In_clk or negedge In_rst_n)begin
         if(In_rst_n == 1'b0)
             cnt_sclk1 <= 'd0;
@@ -95,6 +94,7 @@ module spi_master_tx_mode3#(
             cnt_sclk1 <= 'd0;
     end
 
+    reg [31:0]cnt_sclk2;
     always@(posedge In_clk or negedge In_rst_n)begin
         if(In_rst_n == 1'b0)
             cnt_sclk2 <= 'd0;
@@ -108,23 +108,11 @@ module spi_master_tx_mode3#(
             cnt_sclk2 <= 'd0;
     end
 
-    // flag
-    always@(posedge In_clk or negedge In_rst_n)begin
-        if(In_rst_n == 1'b0)
-            flag <= 1'b0;
-        else if((num_bit == 8)&&(cnt_sclk2 == CNT_SCLK - 1))
-            flag <= 1'b0;
-        else if(cnt_sclk1 == CNT_SCLK - 1)
-            flag <= 1'b1;
-        else
-            flag <= flag;
-    end
-
     // sclk
     always@(posedge In_clk or negedge In_rst_n)begin
         if(In_rst_n == 1'b0)
             Out_spi_sclk <= 1'b1;
-        else if((start == 1'b1)&&(flag==1'b1))begin
+        else if(start == 1'b1)begin
             if(cnt_sclk2 == 0)
                 Out_spi_sclk <= ~Out_spi_sclk;
             else
@@ -135,11 +123,12 @@ module spi_master_tx_mode3#(
     end
 
     // num_bit
+    reg [3:0]num_bit;
     always@(posedge In_clk or negedge In_rst_n)begin
         if(In_rst_n == 1'b0)
             num_bit <= 'd0;
         else if(start == 1'b1)begin
-            if((num_bit == 8)&&(cnt_sclk1 == DIV_SCLK/2 - 1))
+            if((num_bit == 7)&&(cnt_sclk1 == DIV_SCLK - 1))
                 num_bit <= 'd0;
             else if(cnt_sclk1 == DIV_SCLK - 1)
                 num_bit <= num_bit + 1'b1;
@@ -155,7 +144,7 @@ module spi_master_tx_mode3#(
         if(In_rst_n == 1'b0)
             Out_spi_mosi <= 1'bx;
         else if(start==1'b1)begin
-            if(cnt_sclk2 == CNT_SCLK - 1)begin
+            if(cnt_sclk2 == 0)begin
                 case(num_bit)
                     0:Out_spi_mosi <= In_tx_data[7];
                     1:Out_spi_mosi <= In_tx_data[6];
